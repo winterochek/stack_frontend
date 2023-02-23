@@ -18,7 +18,7 @@ export const TopBarComponent = () => {
   const classes = useStyles();
 
   return (
-    <Box display='flex' justifyContent='space-between' alignItems='center' px='32px' py='24px'>
+    <Box display='flex' justifyContent='space-between' alignItems='center' paddingRight='32px' py='24px'>
       <Grid>Welcome Pasha</Grid>
       <Box display='flex' alignItems='center' >
         <Grid onClick={colorMode.toggleColorMode} sx={{pr: '37px', borderRight: `1px solid ${colors.gray.DEFAULT}`}}>

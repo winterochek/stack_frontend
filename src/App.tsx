@@ -6,6 +6,9 @@ import { AuthRootComponent } from './components/auth';
 import { ColorModeContext, useMode } from './theme';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { LayoutComponent } from './components/layout';
+import { WatchListComponent } from './components/watchlist';
+import { FeedComponent } from './components/feed';
+import { SettingsComponent } from './components/settings';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -19,6 +22,9 @@ function App() {
             <Routes>
               <Route element={<PrivateRoute />}>
                 <Route path='/' element={<Home />} />
+                <Route path='/watchlist' element={<WatchListComponent />} />
+                <Route path='/feed' element={<FeedComponent />} />
+                <Route path='/settings' element={<SettingsComponent />} />
               </Route>
               <Route path='/login' element={<AuthRootComponent />} />
               <Route path='/register' element={<AuthRootComponent />} />

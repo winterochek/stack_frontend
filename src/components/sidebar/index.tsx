@@ -16,16 +16,13 @@ import {
 } from '@mui/material';
 
 import {
-  HomeOutlined,
   ChevronLeftOutlined,
-  LaptopChromebookOutlined,
   ChevronRightOutlined,
-  BarChartOutlined,
-  SettingsApplicationsOutlined,
   LogoutOutlined,
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router';
 import { FlexBetween } from '../flexBetween';
+import { navMenu } from '../../common/moks/navigate';
 
 export const SideBarComponent = (props: any) => {
   const [active, setActive] = useState('');
@@ -64,13 +61,27 @@ export const SideBarComponent = (props: any) => {
                   <Box display='flex' alignItems='center' gap='10px'>
                     <Typography>SmartCoin</Typography>
                   </Box>
-                  {!isNonMobile && <IconButton onClick={e=>setSideOpen(!sideOpen)} >
-                    <ChevronLeftOutlined />
-                    </IconButton>}
+                  {!isNonMobile && (
+                    <IconButton onClick={e => setSideOpen(!sideOpen)}>
+                      <ChevronLeftOutlined />
+                    </IconButton>
+                  )}
                 </FlexBetween>
               </Box>
-              <Box></Box>
-              <Box></Box>
+              <List>
+                {navMenu.map(item => (
+                  <ListItem
+                    sx={{ cursor: 'pointer' }}
+                    onClick={e => navigate(item.patch)}
+                    key={item.id}
+                  >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText>
+                      <Typography variant='body1'>{item.name}</Typography>
+                    </ListItemText>
+                  </ListItem>
+                ))}
+              </List>
             </Box>
           </Drawer>
         )}
