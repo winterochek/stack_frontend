@@ -9,6 +9,8 @@ import { LoginPage } from './login';
 import { RegisterPage } from './register';
 import './style.scss';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { LoginScheme } from '../utils/yup';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const location = useLocation();
@@ -23,11 +25,11 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
-  console.log('errors', errors);
+  } = useForm({
+    resolver: yupResolver(LoginScheme),
+    mode: 'onBlur',
+  });
   const handleSubmitForm = async (data: any) => {
-    console.log('data', data);
-
     if (location.pathname === '/login') {
       try {
         const userData = {

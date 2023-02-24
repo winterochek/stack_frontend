@@ -26,17 +26,12 @@ export const LoginPage: React.FC<IPropsLogin> = (
         label='Email'
         variant='outlined'
         placeholder='Type your email'
-        {...register('email', {
-          required: 'This field is required',
-        })}
+        {...register('email')}
       />
       <TextField
         error={!!errors.password}
         helperText={!!errors.password ? `${errors.password.message}` : '' }
-        {...register('password', {
-          required: 'This field is required',
-          
-        })}
+        {...register('password')}
         type='password'
         fullWidth={true}
         margin='normal'
