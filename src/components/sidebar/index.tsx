@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import logo from '../../assets/images/sidebar/logo.svg';
 import { useStyles } from './styles';
 import {
   Box,
@@ -16,16 +17,13 @@ import {
 } from '@mui/material';
 
 import {
-  HomeOutlined,
   ChevronLeftOutlined,
-  LaptopChromebookOutlined,
   ChevronRightOutlined,
-  BarChartOutlined,
-  SettingsApplicationsOutlined,
   LogoutOutlined,
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router';
 import { FlexBetween } from '../flexBetween';
+import { navMenu } from '../../common/moks/navigate';
 
 export const SideBarComponent = (props: any) => {
   const [active, setActive] = useState('');
@@ -33,6 +31,7 @@ export const SideBarComponent = (props: any) => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const theme = useTheme();
+
   const { isNonMobile, drawerWidth, sideOpen, setSideOpen } = props;
 
   useEffect(() => {
@@ -58,19 +57,51 @@ export const SideBarComponent = (props: any) => {
               },
             }}
           >
-            <Box width='100%'>
-              <Box>
-                <FlexBetween>
-                  <Box display='flex' alignItems='center' gap='10px'>
-                    <Typography>SmartCoin</Typography>
-                  </Box>
-                  {!isNonMobile && <IconButton onClick={e=>setSideOpen(!sideOpen)} >
+            <Box className={classes.navBlock}>
+              <FlexBetween sx={{ paddingLeft: '16px' }}>
+                <Box className={classes.brand}>
+                  <img src={logo} alt='stack__logo' />
+                  <Typography variant='h1' className={classes.brandTitle}>
+                    stack
+                  </Typography>
+                </Box>
+                {!isNonMobile && (
+                  <IconButton onClick={e => setSideOpen(!sideOpen)}>
                     <ChevronLeftOutlined />
-                    </IconButton>}
-                </FlexBetween>
-              </Box>
-              <Box></Box>
-              <Box></Box>
+                  </IconButton>
+                )}
+              </FlexBetween>
+              <List className={classes.menuList}>
+                {navMenu.map(item => (
+                  <ListItem key={item.id}>
+                    <Box
+                      className={classes.menuItem}
+                      onClick={e => navigate(item.patch)}
+                    >
+                      <ListItemIcon className={classes.itemSVG}>
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText>
+                        <Typography variant='body1'>{item.name}</Typography>
+                      </ListItemText>
+                    </Box>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+            <Box width='100%'>
+              <List>
+                <ListItem>
+                  <Box className={classes.menuItem}>
+                    <ListItemIcon>
+                      <LogoutOutlined />
+                    </ListItemIcon>
+                    <ListItemText>
+                      <Typography variant='body1'>Logout</Typography>
+                    </ListItemText>
+                  </Box>
+                </ListItem>
+              </List>
             </Box>
           </Drawer>
         )}

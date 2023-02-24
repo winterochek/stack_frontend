@@ -1,0 +1,18 @@
+import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
+export const useStyles = makeStyles((theme: Theme) => {
+  return {
+    root: {
+      display: 'flex',
+      width: '100%',
+    },
+
+    mainSection: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+  };
+});

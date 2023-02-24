@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
 *{
     font-family: 'Poppins', sans-serif !important;
-    box-sizing: border-box !important;
 } 
 
+
+/* #root > div > nav > div > div > div > ul > li > div:hover > div > svg{
+    fill: white;
+} */
 
 
 
