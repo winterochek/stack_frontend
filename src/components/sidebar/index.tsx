@@ -17,8 +17,7 @@ import {
 } from '@mui/material';
 
 import {
-  ChevronLeftOutlined,
-  ChevronRightOutlined,
+  CloseOutlined,
   LogoutOutlined,
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router';
@@ -65,9 +64,9 @@ export const SideBarComponent = (props: any) => {
                     stack
                   </Typography>
                 </Box>
-                {!isNonMobile && (
+                {sideOpen && (
                   <IconButton onClick={e => setSideOpen(!sideOpen)}>
-                    <ChevronLeftOutlined />
+                    <CloseOutlined />
                   </IconButton>
                 )}
               </FlexBetween>

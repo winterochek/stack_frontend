@@ -1,34 +1,31 @@
 import { Box, useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
-import { ILayout } from '../../common/types/layout';
+import { Outlet, useLocation } from 'react-router';
 import { SideBarComponent } from '../sidebar';
 import { TopBarComponent } from '../topbar';
-import {useStyles} from './styles'
+import { useStyles } from './styles';
 
-export const LayoutComponent = ({ children }: ILayout) => {
-  const [sideOpen, setSideOpen] = useState(true)
+export const LayoutComponent = () => {
+  const [sideOpen, setSideOpen] = useState(false);
   const location = useLocation();
   const isNonMobile = useMediaQuery('(min-width: 600px');
-  const classes = useStyles()
+  const classes = useStyles();
   return location.pathname === '/login' || location.pathname === '/register' ? (
-    <>{children}</>
+    <>
+      <Outlet />
+    </>
   ) : (
     <>
-      <Box 
-      display={isNonMobile ? 'flex' : 'block'} 
-      width='100%' 
-      height='100%'
-      >
-        <SideBarComponent 
-            isNonMobile={isNonMobile}
-            drawerWidth='250px'
-            sideOpen={sideOpen}
-            setSideOpen={setSideOpen}
+      <Box display={isNonMobile ? 'flex' : 'block'} width='100%' height='100%'>
+        <SideBarComponent
+          isNonMobile={isNonMobile}
+          drawerWidth='250px'
+          sideOpen={sideOpen}
+          setSideOpen={setSideOpen}
         />
-        <Box className={classes.mainSection} height='100%' >
-          <TopBarComponent />
-          {children}
+        <Box className={classes.mainSection} height='100%'>
+          <TopBarComponent sideOpen = {sideOpen} setSideOpen={setSideOpen} />
+          <Outlet />
         </Box>
       </Box>
     </>
