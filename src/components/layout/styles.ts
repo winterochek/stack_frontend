@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
 
     mainSection: {
-      width: '100%',
+      flexGrow: 1,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
