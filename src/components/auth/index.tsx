@@ -8,6 +8,7 @@ import { useAppDispatch } from '../utils/hook';
 import { LoginPage } from './login';
 import { RegisterPage } from './register';
 import './style.scss';
+import { useForm } from 'react-hook-form';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const location = useLocation();
@@ -17,16 +18,21 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
   const [firstName, setFirstName] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  console.log('errors', errors);
+  const handleSubmitForm = async (data: any) => {
+    console.log('data', data);
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
     if (location.pathname === '/login') {
       try {
         const userData = {
-          email,
-          password,
+          email: data.email,
+          password: data.password,
         };
         const user = await instance.post('auth/login', userData);
         dispatch(login(user.data));
@@ -49,7 +55,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
         navigate('/');
       } catch (e) {
         console.log(e);
-        
+
         return e;
       }
     } else {
@@ -57,7 +63,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     }
   };
   return (
-    <div onSubmit={handleSubmit} className='root'>
+    <div onSubmit={handleSubmit(handleSubmitForm)} className='root'>
       <form className='form'>
         <Box
           display='flex'
@@ -73,8 +79,8 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
           {location.pathname === '/login' ? (
             <LoginPage
               navigate={navigate}
-              setEmail={setEmail}
-              setPassword={setPassword}
+              register={register}
+              errors={errors}
             />
           ) : location.pathname === '/register' ? (
             <RegisterPage

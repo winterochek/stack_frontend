@@ -4,7 +4,7 @@ import { IPropsLogin } from '../../../common/types/auth';
 export const LoginPage: React.FC<IPropsLogin> = (
   props: IPropsLogin
 ): JSX.Element => {
-  const { navigate, setEmail, setPassword } = props;
+  const { navigate, register, errors } = props;
   return (
     <>
       <Typography
@@ -19,15 +19,24 @@ export const LoginPage: React.FC<IPropsLogin> = (
         Your credentials
       </Typography>
       <TextField
-        onChange={e => setEmail(e.target.value)}
+        error={!!errors.email}
+        helperText={!!errors.email ? `${errors.email.message}` : '' }
         fullWidth={true}
         margin='normal'
         label='Email'
         variant='outlined'
         placeholder='Type your email'
+        {...register('email', {
+          required: 'This field is required',
+        })}
       />
       <TextField
-        onChange={e => setPassword(e.target.value)}
+        error={!!errors.password}
+        helperText={!!errors.password ? `${errors.password.message}` : '' }
+        {...register('password', {
+          required: 'This field is required',
+          
+        })}
         type='password'
         fullWidth={true}
         margin='normal'
