@@ -7,7 +7,7 @@ import { TopBarComponent } from '../topbar';
 import {useStyles} from './styles'
 
 export const LayoutComponent = ({ children }: ILayout) => {
-    const [sideOpen, setSideOpen] = useState(true)
+  const [sideOpen, setSideOpen] = useState(true)
   const location = useLocation();
   const isNonMobile = useMediaQuery('(min-width: 600px');
   const classes = useStyles()
@@ -15,14 +15,18 @@ export const LayoutComponent = ({ children }: ILayout) => {
     <>{children}</>
   ) : (
     <>
-      <Box display={isNonMobile ? 'flex' : 'block'} width='100%' height='100%'>
+      <Box 
+      display={isNonMobile ? 'flex' : 'block'} 
+      width='100%' 
+      height='100%'
+      >
         <SideBarComponent 
             isNonMobile={isNonMobile}
             drawerWidth='250px'
             sideOpen={sideOpen}
             setSideOpen={setSideOpen}
         />
-        <Box className={classes.mainSection} >
+        <Box className={classes.mainSection} height='100%' >
           <TopBarComponent />
           {children}
         </Box>
