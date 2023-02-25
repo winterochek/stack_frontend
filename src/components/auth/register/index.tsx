@@ -7,11 +7,8 @@ export const RegisterPage: React.FC<IPropsRegister> = (
 ): JSX.Element => {
   const {
     navigate,
-    setEmail,
-    setPassword,
-    setRepeatPassword,
-    setFirstName,
-    setUsername,
+    register,
+    errors,
   } = props;
 
   return (
@@ -28,7 +25,9 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         Your credentials
       </Typography>
       <TextField
-        onChange={e => setFirstName(e.target.value)}
+        error={!!errors.name}
+        helperText={!!errors.name ? `${errors.name.message}` : '' }
+        {...register('name')}
         fullWidth={true}
         margin='normal'
         label='Name'
@@ -36,7 +35,9 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         placeholder='Type your name'
       />
       <TextField
-        onChange={e => setUsername(e.target.value)}
+        error={!!errors.username}
+        helperText={!!errors.username ? `${errors.username.message}` : '' }
+        {...register('username')}
         fullWidth={true}
         margin='normal'
         label='userName'
@@ -44,7 +45,9 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         placeholder='Type your userName'
       />
       <TextField
-        onChange={e => setEmail(e.target.value)}
+        error={!!errors.email}
+        helperText={!!errors.email ? `${errors.email.message}` : '' }
+        {...register('email')}
         fullWidth={true}
         margin='normal'
         label='Email'
@@ -52,7 +55,9 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         placeholder='Type your email'
       />
       <TextField
-        onChange={e => setPassword(e.target.value)}
+        error={!!errors.password}
+        helperText={!!errors.password ? `${errors.password.message}` : '' }
+        {...register('password')}
         type='password'
         fullWidth={true}
         margin='normal'
@@ -61,7 +66,9 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         placeholder='Type your password'
       />
       <TextField
-        onChange={e => setRepeatPassword(e.target.value)}
+        error={!!errors.confPass}
+        helperText={!!errors.confPass ? `${errors.confPass.message}` : '' }
+        {...register('confPass')}
         type='password'
         fullWidth={true}
         margin='normal'

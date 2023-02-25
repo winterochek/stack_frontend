@@ -10,15 +10,10 @@ import { RegisterPage } from './register';
 import './style.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginScheme } from '../utils/yup';
+import { LoginScheme, RegisterScheme } from '../utils/yup';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const location = useLocation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [username, setUsername] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
@@ -26,7 +21,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     formState: { errors },
     handleSubmit,
   } = useForm({
-    resolver: yupResolver(LoginScheme),
+    resolver: yupResolver(location.pathname === '/login' ? LoginScheme : RegisterScheme),
     mode: 'onBlur',
   });
   const handleSubmitForm = async (data: any) => {
@@ -42,14 +37,13 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
       } catch (e) {
         return e;
       }
-    } else if (password === repeatPassword) {
+    } else if (data.password === data.confPass) {
       try {
         const userData = {
-          email,
-          password,
-          repeatPassword,
-          firstName,
-          username,
+          email: data.email,
+          password: data.password,
+          firstName: data.name,
+          username: data.username,
         };
 
         const newUser = await instance.post('auth/register', userData);
@@ -87,11 +81,8 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
           ) : location.pathname === '/register' ? (
             <RegisterPage
               navigate={navigate}
-              setEmail={setEmail}
-              setPassword={setPassword}
-              setRepeatPassword={setRepeatPassword}
-              setFirstName={setFirstName}
-              setUsername={setUsername}
+              register={register}
+              errors={errors}
             />
           ) : null}
         </Box>
