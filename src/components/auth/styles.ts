@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
   },
   button: { marginTop: '10px !important', 
     marginBottom: '10px !important', 
-    width: '30%',
+    width: '40%',
     '&:hover': {
       background: 'blue !important'
     },

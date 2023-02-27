@@ -62,11 +62,11 @@ export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.E
                     stack
                   </Typography>
                 </Box>
-                {/* {sideOpen && (
+                {sideOpen && (
                   <IconButton onClick={e => setSideOpen(!sideOpen)}>
                     <CloseOutlined />
                   </IconButton>
-                )} */}
+                )}
               </FlexBetween>
               <List className={classes.menuList}>
                 {navMenu.map(item => (
