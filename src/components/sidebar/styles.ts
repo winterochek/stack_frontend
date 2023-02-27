@@ -16,6 +16,15 @@ export const useStyles = makeStyles((theme: Theme) => {
       color: `${theme.palette.mode === 'dark' ? colors.white.DEFAULT : colors.black.DEFAULT}`
 
     },
+
+    active: {
+      backgroundColor: '#1900D5 !important',
+        color: 'white',
+        borderRadius: '4px',
+        '& .MuiSvgIcon-root': {
+          fill: `${colors.white.DEFAULT} !important`
+        }
+    },
     navBlock: {
       borderBottom: `1px solid ${colors.borderColor}`,
       width: '100%',
@@ -25,7 +34,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
     menuItem: {
       display: 'flex',
-      rowGap: '15px',
+      gap: '15px',
       width: '100%',
       height: '100%',
       alignItems: 'center',
@@ -42,7 +51,9 @@ export const useStyles = makeStyles((theme: Theme) => {
       },
     },
     itemSVG: {
-      minWidth: '24px',
+      maxWidth: '24px !important',
+      maxHeight: '24px',
+      marginRight: '-32px',
     },
   };
 });

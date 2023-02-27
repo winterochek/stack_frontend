@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import logo from '../../assets/images/sidebar/logo.svg';
 import { useStyles } from './styles';
 import {
   Box,
   Drawer,
-  Divider,
   IconButton,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
   useTheme,
-  Icon,
 } from '@mui/material';
 
 import {
@@ -23,8 +20,9 @@ import {
 import { useLocation, useNavigate } from 'react-router';
 import { FlexBetween } from '../flexBetween';
 import { navMenu } from '../../common/moks/navigate';
+import { ISideBarProps } from '../../common/types/sidebar';
 
-export const SideBarComponent = (props: any) => {
+export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
   const [active, setActive] = useState('');
   const navigate = useNavigate();
   const classes = useStyles();
@@ -34,7 +32,7 @@ export const SideBarComponent = (props: any) => {
   const { isNonMobile, drawerWidth, sideOpen, setSideOpen } = props;
 
   useEffect(() => {
-    setActive(pathname.substring(1));
+    setActive(pathname);
   }, [pathname]);
 
   return (
@@ -64,17 +62,17 @@ export const SideBarComponent = (props: any) => {
                     stack
                   </Typography>
                 </Box>
-                {sideOpen && (
+                {/* {sideOpen && (
                   <IconButton onClick={e => setSideOpen(!sideOpen)}>
                     <CloseOutlined />
                   </IconButton>
-                )}
+                )} */}
               </FlexBetween>
               <List className={classes.menuList}>
                 {navMenu.map(item => (
                   <ListItem key={item.id}>
                     <Box
-                      className={classes.menuItem}
+                      className={ (active === item.patch) ? `${classes.menuItem} ${classes.active}` : classes.menuItem}
                       onClick={e => navigate(item.patch)}
                     >
                       <ListItemIcon className={classes.itemSVG}>

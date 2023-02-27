@@ -1,15 +1,13 @@
 import React from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import { IPropsRegister } from '../../../common/types/auth';
+import { useStyles } from './../styles';
 
 export const RegisterPage: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
-  const {
-    navigate,
-    register,
-    errors,
-  } = props;
+  const { navigate, register, errors } = props;
+  const classes = useStyles();
 
   return (
     <>
@@ -17,7 +15,7 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         variant='h2'
         marginBottom={1}
         textAlign='center'
-        className='auth__heading'
+        className={classes.auth__heading}
       >
         Registration
       </Typography>
@@ -26,7 +24,7 @@ export const RegisterPage: React.FC<IPropsRegister> = (
       </Typography>
       <TextField
         error={!!errors.name}
-        helperText={!!errors.name ? `${errors.name.message}` : '' }
+        helperText={!!errors.name ? `${errors.name.message}` : ''}
         {...register('name')}
         fullWidth={true}
         margin='normal'
@@ -36,7 +34,7 @@ export const RegisterPage: React.FC<IPropsRegister> = (
       />
       <TextField
         error={!!errors.username}
-        helperText={!!errors.username ? `${errors.username.message}` : '' }
+        helperText={!!errors.username ? `${errors.username.message}` : ''}
         {...register('username')}
         fullWidth={true}
         margin='normal'
@@ -46,7 +44,7 @@ export const RegisterPage: React.FC<IPropsRegister> = (
       />
       <TextField
         error={!!errors.email}
-        helperText={!!errors.email ? `${errors.email.message}` : '' }
+        helperText={!!errors.email ? `${errors.email.message}` : ''}
         {...register('email')}
         fullWidth={true}
         margin='normal'
@@ -56,7 +54,7 @@ export const RegisterPage: React.FC<IPropsRegister> = (
       />
       <TextField
         error={!!errors.password}
-        helperText={!!errors.password ? `${errors.password.message}` : '' }
+        helperText={!!errors.password ? `${errors.password.message}` : ''}
         {...register('password')}
         type='password'
         fullWidth={true}
@@ -67,7 +65,7 @@ export const RegisterPage: React.FC<IPropsRegister> = (
       />
       <TextField
         error={!!errors.confPass}
-        helperText={!!errors.confPass ? `${errors.confPass.message}` : '' }
+        helperText={!!errors.confPass ? `${errors.confPass.message}` : ''}
         {...register('confPass')}
         type='password'
         fullWidth={true}
@@ -78,14 +76,17 @@ export const RegisterPage: React.FC<IPropsRegister> = (
       />
       <Button
         type='submit'
-        sx={{ marginTop: 2, marginBottom: 2, width: '30%' }}
         variant='contained'
+        className={classes.button}
       >
         Sign up
       </Button>
       <Typography variant='body1' textAlign='center' className='auth__subtitle'>
         Already registered?{' '}
-        <span onClick={e => navigate('/login')} className='inciting__text'>
+        <span
+          onClick={e => navigate('/login')}
+          className={classes.inciting__text}
+        >
           Sign in
         </span>
       </Typography>
