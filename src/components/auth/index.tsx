@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppErrors } from '../../common/errors';
 import { login } from '../../store/slice/auth';
@@ -7,22 +7,24 @@ import { instance } from '../utils/axios';
 import { useAppDispatch } from '../utils/hook';
 import { LoginPage } from './login';
 import { RegisterPage } from './register';
-import './style.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginScheme, RegisterScheme } from '../utils/yup';
+import { useStyles } from './styles';
 
 export const AuthRootComponent: React.FC = (): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const classes = useStyles();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({
-    resolver: yupResolver(location.pathname === '/login' ? LoginScheme : RegisterScheme),
-    mode: 'onBlur',
+    resolver: yupResolver(
+      location.pathname === '/login' ? LoginScheme : RegisterScheme
+    ),
   });
   const handleSubmitForm = async (data: any) => {
     if (location.pathname === '/login') {
@@ -59,8 +61,8 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
     }
   };
   return (
-    <div onSubmit={handleSubmit(handleSubmitForm)} className='root'>
-      <form className='form'>
+    <div onSubmit={handleSubmit(handleSubmitForm)} className={classes.root}>
+      <form className={classes.form}>
         <Box
           display='flex'
           justifyContent='center'
@@ -70,7 +72,7 @@ export const AuthRootComponent: React.FC = (): JSX.Element => {
           margin='auto'
           padding={5}
           borderRadius={5}
-          boxShadow={'5px 5px 10px #ccc'}
+          boxShadow={'-3px -2px 20px 1px #202020'}
         >
           {location.pathname === '/login' ? (
             <LoginPage

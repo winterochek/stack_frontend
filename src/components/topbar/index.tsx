@@ -8,7 +8,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SearchIcon from '@mui/icons-material/Search';
@@ -17,8 +17,9 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { ColorModeContext } from '../../theme';
 import { useStyles } from './styles';
 import { FlexBetween } from '../flexBetween';
+import { ITopbarProps } from '../../common/types/topbar';
 
-export const TopBarComponent = (props: any) => {
+export const TopBarComponent:FC<ITopbarProps> = (props: ITopbarProps):JSX.Element => {
   const { sideOpen,setSideOpen } = props;
 
   const theme = useTheme();
@@ -29,7 +30,7 @@ export const TopBarComponent = (props: any) => {
     <AppBar className={classes.root} position='static'>
       <Toolbar className={classes.toolbar}>
         <FlexBetween>
-          {!sideOpen && <MenuOutlinedIcon className={classes.menuIcon} onClick={e=>setSideOpen((prev: boolean)=>!prev)} />}
+          {!sideOpen && <MenuOutlinedIcon className={classes.menuIcon} onClick={e=>setSideOpen(!sideOpen)} />}
           <Typography variant='h3' >Welcome Pasha</Typography>
         </FlexBetween>
 
