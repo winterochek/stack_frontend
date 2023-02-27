@@ -2,11 +2,12 @@ import React from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import { IPropsRegister } from '../../../common/types/auth';
 import { useStyles } from './../styles';
+import { LoadingButton } from '@mui/lab';
 
 export const RegisterPage: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
-  const { navigate, register, errors } = props;
+  const { navigate, register, errors, loading } = props;
   const classes = useStyles();
 
   return (
@@ -74,13 +75,14 @@ export const RegisterPage: React.FC<IPropsRegister> = (
         variant='outlined'
         placeholder='Type your password again'
       />
-      <Button
+      <LoadingButton
+        loading={loading}
         type='submit'
         variant='contained'
         className={classes.button}
       >
         Sign up
-      </Button>
+      </LoadingButton>
       <Typography variant='body1' textAlign='center' className='auth__subtitle'>
         Already registered?{' '}
         <span

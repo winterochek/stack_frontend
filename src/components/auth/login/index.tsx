@@ -1,10 +1,11 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
 import { useStyles } from './../styles';
+import { LoadingButton } from '@mui/lab';
 export const LoginPage: React.FC<IPropsLogin> = (
   props: IPropsLogin
 ): JSX.Element => {
-  const { navigate, register, errors } = props;
+  const { navigate, register, errors, loading } = props;
   const classes = useStyles();
   return (
     <>
@@ -40,9 +41,9 @@ export const LoginPage: React.FC<IPropsLogin> = (
         variant='outlined'
         placeholder='Type your password'
       />
-      <Button type='submit' variant='contained' className={classes.button}>
+      <LoadingButton loading={loading} type='submit' variant='contained' className={classes.button}>
         Sign in
-      </Button>
+      </LoadingButton>
       <Typography variant='body1' textAlign='center' className='auth__subtitle'>
         Haven`t registered yet?{' '}
         <span
