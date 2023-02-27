@@ -21,7 +21,8 @@ import { ITopbarProps } from '../../common/types/topbar';
 
 export const TopBarComponent:FC<ITopbarProps> = (props: ITopbarProps):JSX.Element => {
   const { sideOpen,setSideOpen } = props;
-
+  const firstName:any= sessionStorage.getItem('user');
+  const welcomeName =  firstName ? (firstName[0].toUpperCase() + firstName.slice(1)) : 'user'
   const theme = useTheme();
   const colorMode: any = useContext(ColorModeContext);
   const classes = useStyles();
@@ -31,7 +32,7 @@ export const TopBarComponent:FC<ITopbarProps> = (props: ITopbarProps):JSX.Elemen
       <Toolbar className={classes.toolbar}>
         <FlexBetween>
           {!sideOpen && <MenuOutlinedIcon className={classes.menuIcon} onClick={e=>setSideOpen(!sideOpen)} />}
-          <Typography variant='h3' >Welcome Pasha</Typography>
+          <Typography variant='h3' >Welcome {welcomeName}</Typography>
         </FlexBetween>
 
         <Box className={classes.topnav}>
