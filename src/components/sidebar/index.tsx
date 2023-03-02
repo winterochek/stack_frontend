@@ -55,7 +55,7 @@ export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.E
             }}
           >
             <Box className={classes.navBlock}>
-              <FlexBetween sx={{ paddingLeft: '16px' }}>
+              <Box sx={{ paddingLeft: '16px', paddingRight: '16px', display:'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Box className={classes.brand}>
                   <img src={logo} alt='stack__logo' />
                   <Typography variant='h1' className={classes.brandTitle}>
@@ -67,7 +67,7 @@ export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.E
                     <CloseOutlined />
                   </IconButton>
                 )}
-              </FlexBetween>
+              </Box>
               <List className={classes.menuList}>
                 {navMenu.map(item => (
                   <ListItem key={item.id}>

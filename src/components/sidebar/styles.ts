@@ -8,7 +8,10 @@ export const useStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       alignItems: 'center',
       gap: '10px',
-      padding: '30px 15px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      paddingTop: '30px',
+      paddingBottom: '0px',
       cursor: 'pointer',
     },
 
@@ -31,6 +34,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
     menuList: {
       marginBottom: '55px',
+      paddingTop: '0px !important',
     },
     menuItem: {
       display: 'flex',

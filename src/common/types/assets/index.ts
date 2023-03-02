@@ -1,5 +1,5 @@
 export interface IAreaChartProps{
-    data: [number[]]
+    data: number[][]
 }
 
 export interface ILineChartProps{

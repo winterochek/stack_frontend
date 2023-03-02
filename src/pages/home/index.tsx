@@ -7,7 +7,7 @@ import { AreaChart } from '../../components/charts/areaChart';
 import TrendUp from '../../assets/images/charts/trend-up.svg';
 import TrendDown from '../../assets/images/charts/trend-down.svg';
 import { LineChart } from '../../components/charts/lineChart';
-import { IChartData } from '../../common/types/assets';
+import { IChartData, ISingleAsset } from '../../common/types/assets';
 
 export const Home: FC = (): JSX.Element => {
   const favoriteAssets: IChartData[] = useAppSelector(
@@ -42,13 +42,17 @@ export const Home: FC = (): JSX.Element => {
     fetchData(favoriteAssetNames);
   }, [favoriteAssetNames, fetchData]);
 
-  const renderFavoriteBlock = filteredArray.map((item: any) => {
-    const currentPrice = item.singleAsset.map(
-      (item: any) => item.current_price
-    );
-    const changePrice24h = item.singleAsset.map((item: any) =>
-      item.price_change_percentage_24h.toFixed(2)
-    );
+  const renderFavoriteBlock = filteredArray.map((item: IChartData) => {
+    let currentPrice = 0
+    let changePrice24h = 0
+    item.singleAsset.forEach((item:ISingleAsset)=>{
+      currentPrice = item.current_price
+      changePrice24h = item.price_change_percentage_24h
+    })
+
+
+    
+    
 
     return (
       <Grid item xs={12} sm={6} lg={6} key={item.name}>
@@ -69,7 +73,7 @@ export const Home: FC = (): JSX.Element => {
                 ) : (
                   <img src={TrendDown} alt='TrendDown' />
                 )}
-                <span>{changePrice24h}%</span>
+                <span>{changePrice24h.toFixed(2)}%</span>
               </Box>
             </div>
           </Grid>

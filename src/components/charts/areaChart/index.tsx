@@ -56,7 +56,7 @@ export const AreaChart = (props: IAreaChartProps) => {
     datasets: [
       {
         label: 'Price',
-        data: data.map((item: number[]) => item[1]),
+        data: data.map((item: number[]) => item[1] as number),
         fill: 'start',
         backgroundColor: (context: ScriptableContext<'line'>) => {
           const ctx = context.chart.ctx;

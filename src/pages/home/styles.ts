@@ -47,9 +47,9 @@ export const useStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       justifyContent: 'center',
       gap: '5px',
-      width: '30%',
+      width: 'fit-content',
       alignItems: 'center',
-      padding: '2px',
+      padding: '2px 5px',
       borderRadius: 4,
     },
     trendUp: {
@@ -74,6 +74,8 @@ export const useStyles = makeStyles((theme: Theme) => {
       minHeight: 270,
       border: `1px solid ${colors.borderColor}`,
       borderRadius: 12,
+      width: '100%',
+
       
     },
   };
