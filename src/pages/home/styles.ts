@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     root: {
       flexGrow: 1,
       padding: '32px',
+      // backgroundColor: 'black'
     },
     topCardItem: {
       backgroundColor: `${

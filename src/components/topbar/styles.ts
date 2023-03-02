@@ -30,7 +30,8 @@ export const useStyles:any = makeStyles((theme: Theme) => {
       padding: '24px 48px',
       // height: '96px',
 
-
+      paddingLeft: '32px !important',
+      paddingRight: '32px !important',
     },
     searchBlock: {
       maxHeight: '50px',
