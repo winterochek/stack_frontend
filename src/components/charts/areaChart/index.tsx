@@ -68,7 +68,6 @@ export const AreaChart = (props: IAreaChartProps) => {
       },
     ],
   };
-  console.log('props:', props);
 
   return <Line options={options} data={values} width={300} height={100} />;
 };

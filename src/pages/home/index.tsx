@@ -9,9 +9,9 @@ import TrendDown from '../../assets/images/charts/trend-down.svg';
 
 export const Home: FC = (): JSX.Element => {
   const favoriteAssets: any[] = useAppSelector(
-    state => state.assets.favoriteAssets
+    (state:any) => state.assets.favoriteAssets
   );
-  const dispatch = useAppDispatch();
+  const dispatch:any = useAppDispatch();
   const classes = useStyles();
 
   const favoriteAssetNames = useMemo(() => ['bitcoin', 'ethereum'], []);
