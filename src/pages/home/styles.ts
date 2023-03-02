@@ -47,9 +47,9 @@ export const useStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       justifyContent: 'center',
       gap: '5px',
-      width: '30%',
+      width: 'fit-content',
       alignItems: 'center',
-      padding: '2px',
+      padding: '2px 5px',
       borderRadius: 4,
     },
     trendUp: {
@@ -60,6 +60,23 @@ export const useStyles = makeStyles((theme: Theme) => {
     trendDown: {
       backgroundColor: '#FFA7A7',
       color: '#740000',
+    },
+    areaChart:{
+      marginBottom:'32px',
+    },
+    lineChartBlock:{
+      backgroundColor:`${
+        theme.palette.mode === 'light'
+        ? colors.primary.DEFAULT
+        : colors.primary[600]
+      }`,
+      padding: '20px 16px',
+      minHeight: 270,
+      border: `1px solid ${colors.borderColor}`,
+      borderRadius: 12,
+      width: '100%',
+
+      
     },
   };
 });
