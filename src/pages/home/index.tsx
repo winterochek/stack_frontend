@@ -6,12 +6,14 @@ import { useStyles } from './styles';
 import { AreaChart } from '../../components/charts/areaChart';
 import TrendUp from '../../assets/images/charts/trend-up.svg';
 import TrendDown from '../../assets/images/charts/trend-down.svg';
+import { LineChart } from '../../components/charts/lineChart';
+import { IChartData } from '../../common/types/assets';
 
 export const Home: FC = (): JSX.Element => {
-  const favoriteAssets: any[] = useAppSelector(
-    (state:any) => state.assets.favoriteAssets
+  const favoriteAssets: IChartData[] = useAppSelector(
+    (state: any) => state.assets.favoriteAssets
   );
-  const dispatch:any = useAppDispatch();
+  const dispatch: any = useAppDispatch();
   const classes = useStyles();
 
   const favoriteAssetNames = useMemo(() => ['bitcoin', 'ethereum'], []);
@@ -55,7 +57,13 @@ export const Home: FC = (): JSX.Element => {
             <h3 className={classes.assetName}>{item.name}</h3>
             <div className={classes.itemDetails}>
               <h3 className={classes.cardPrice}>${currentPrice}</h3>
-              <Box className={changePrice24h > 0 ? `${classes.priceTrend} ${classes.trendUp}` : `${classes.priceTrend} ${classes.trendDown}`}>
+              <Box
+                className={
+                  changePrice24h > 0
+                    ? `${classes.priceTrend} ${classes.trendUp}`
+                    : `${classes.priceTrend} ${classes.trendDown}`
+                }
+              >
                 {changePrice24h > 0 ? (
                   <img src={TrendUp} alt='TrendUp' />
                 ) : (
@@ -75,8 +83,13 @@ export const Home: FC = (): JSX.Element => {
 
   return (
     <Box className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.areaChart}>
         {renderFavoriteBlock}
+      </Grid>
+      <Grid container className={classes.lineChartBlock}>
+        <Grid item xs={12} lg={12} sm={12}>
+          {filteredArray.length && <LineChart data={filteredArray}/>}
+        </Grid>
       </Grid>
     </Box>
   );
