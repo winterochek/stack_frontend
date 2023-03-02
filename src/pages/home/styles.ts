@@ -1,9 +1,14 @@
 import { makeStyles } from '@mui/styles';
 import { tokens } from '../../theme';
-import { Theme } from '@mui/material';
+import { Theme, useMediaQuery } from '@mui/material';
 
 export const useStyles = makeStyles((theme: Theme) => {
   const colors = tokens(theme.palette.mode);
+  // const tablet = useMediaQuery('(min-width:768px)')
+  // const phone = useMediaQuery('(min-width:375px)')
+  // console.log('tablet', tablet);
+  // console.log('phone', phone);
+  
   return {
     root: {
       flexGrow: 1,
@@ -11,36 +16,50 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
     topCardItem: {
       backgroundColor: `${
-        theme.palette.mode === 'light' ? colors.primary.DEFAULT : colors.primary[600]
+        theme.palette.mode === 'light'
+          ? colors.primary.DEFAULT
+          : colors.primary[600]
       }`,
       padding: '20px 16px',
       minHeight: 185,
       border: `1px solid ${colors.borderColor}`,
       borderRadius: 12,
     },
-    assetName:{
-        fontSize: 25,
-        fontWeight: 600,
-        lineHeight: '30px',
-        textTransform: 'capitalize',
+    assetName: {
+      fontSize: 25,
+      fontWeight: 600,
+      lineHeight: '30px',
+      textTransform: 'capitalize',
     },
-    itemDetails:{
-        display: 'flex',
-        height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        paddingBottom: '20px',
+    itemDetails: {
+      display: 'flex',
+      height: '100%',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+      paddingBottom: '35px',
     },
-    cardPrice:{
-        fontSize: '32px',
-        fontWeight: 700,
-        lineHeight: '48px',
+    cardPrice: {
+      fontSize: '32px',
+      fontWeight: 700,
+      lineHeight: '48px',
     },
-    cardCapitalize:{
-        color: `${colors.secondary.DEFAULT}`,
-        fontWeight: 400,
-        fontSize: 18,
-        lineHeight: '21px',
+    priceTrend: {
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '5px',
+      width: '30%',
+      alignItems: 'center',
+      padding: '2px',
+      borderRadius: 4,
+    },
+    trendUp: {
+      backgroundColor: '#A9FFA7',
+      color: '#037400',
+    },
+
+    trendDown: {
+      backgroundColor: '#FFA7A7',
+      color: '#740000',
     },
   };
 });
