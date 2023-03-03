@@ -13,16 +13,16 @@ import {
   useTheme,
 } from '@mui/material';
 
-import {
-  CloseOutlined,
-  LogoutOutlined,
-} from '@mui/icons-material';
+import { CloseOutlined, LogoutOutlined } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router';
-import { FlexBetween } from '../flexBetween';
 import { navMenu } from '../../common/moks/navigate';
 import { ISideBarProps } from '../../common/types/sidebar';
+import { ThemeSwitcherAndNotificationsComponent } from '../themeSwitcher';
+import { SearchInputComponent } from '../searchInput';
 
-export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.Element => {
+export const SideBarComponent: FC<ISideBarProps> = (
+  props: ISideBarProps
+): JSX.Element => {
   const [active, setActive] = useState('');
   const navigate = useNavigate();
   const classes = useStyles();
@@ -55,7 +55,15 @@ export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.E
             }}
           >
             <Box className={classes.navBlock}>
-              <Box sx={{ paddingLeft: '16px', paddingRight: '16px', display:'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  paddingLeft: '16px',
+                  paddingRight: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <Box className={classes.brand}>
                   <img src={logo} alt='stack__logo' />
                   <Typography variant='h1' className={classes.brandTitle}>
@@ -68,11 +76,20 @@ export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.E
                   </IconButton>
                 )}
               </Box>
+              {!isNonMobile && <List>
+                <ListItem>
+                  <SearchInputComponent />
+                </ListItem>
+              </List>}
               <List className={classes.menuList}>
                 {navMenu.map(item => (
                   <ListItem key={item.id}>
                     <Box
-                      className={ (active === item.patch) ? `${classes.menuItem} ${classes.active}` : classes.menuItem}
+                      className={
+                        active === item.patch
+                          ? `${classes.menuItem} ${classes.active}`
+                          : classes.menuItem
+                      }
                       onClick={e => navigate(item.patch)}
                     >
                       <ListItemIcon className={classes.itemSVG}>
@@ -88,6 +105,22 @@ export const SideBarComponent: FC<ISideBarProps> = (props: ISideBarProps): JSX.E
             </Box>
             <Box width='100%'>
               <List>
+                {!isNonMobile && (
+                  <ListItem>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        gap: '15px',
+                        width: '100%',
+                        height: '100%',
+                        alignItems: 'center',
+                        paddingLeft: '10px',
+                      }}
+                    >
+                      <ThemeSwitcherAndNotificationsComponent />
+                    </Box>
+                  </ListItem>
+                )}
                 <ListItem>
                   <Box className={classes.menuItem}>
                     <ListItemIcon>

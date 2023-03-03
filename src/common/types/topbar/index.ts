@@ -1,4 +1,5 @@
 export interface ITopbarProps{
     sideOpen: boolean,
-    setSideOpen: (value:boolean) => void
+    setSideOpen: (value:boolean) => void,
+    isNonMobile: boolean,
 }
