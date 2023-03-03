@@ -10,7 +10,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 import moment from 'moment';
 import { ILineChartProps } from '../../../common/types/assets';
 ChartJS.register(
@@ -25,12 +24,20 @@ ChartJS.register(
 
 export const LineChart = (props: ILineChartProps) => {
   const { data } = props;
+  
 
   const options:any = {
     responsive: true,
+    scales: {
+      x:{
+        grid:{
+          display:false
+        }
+      },
+    },
     plugins: {
       legend: {
-        display: false,
+        position: 'top' as const,
       },
     },
   };
@@ -38,7 +45,7 @@ export const LineChart = (props: ILineChartProps) => {
     labels: data[0].data.map((item: any) => moment(item[0]).format('DD.MM.YY')),
     datasets: [
       {
-        label: 'Price',
+        label: data[0].name.charAt(0).toUpperCase() + data[0].name.slice(1),
         data: data[0].data.map((item: any) => item[1]),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
