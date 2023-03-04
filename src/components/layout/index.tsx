@@ -8,7 +8,7 @@ import { useStyles } from './styles';
 export const LayoutComponent:FC = ():JSX.Element => {
   const [sideOpen, setSideOpen] = useState(false);
   const location = useLocation();
-  const isNonMobile = useMediaQuery('(min-width: 600px');
+  const isNonMobile = useMediaQuery('(min-width: 760px');
   const classes = useStyles();
   return location.pathname === '/login' || location.pathname === '/register' ? (
     <>
@@ -24,7 +24,7 @@ export const LayoutComponent:FC = ():JSX.Element => {
           setSideOpen={setSideOpen}
         />
         <Box className={classes.mainSection} height='100%'>
-          <TopBarComponent sideOpen = {sideOpen} setSideOpen={setSideOpen} />
+          <TopBarComponent sideOpen = {sideOpen} setSideOpen={setSideOpen} isNonMobile={isNonMobile}/>
           <Outlet />
         </Box>
       </Box>

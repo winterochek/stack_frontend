@@ -16,17 +16,21 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
 
     brandTitle: {
-      color: `${theme.palette.mode === 'dark' ? colors.white.DEFAULT : colors.black.DEFAULT}`
-
+      color: `${
+        theme.palette.mode === 'dark'
+          ? colors.white.DEFAULT
+          : colors.black.DEFAULT
+      }`,
     },
+    searchWrapper: { width: '100%', paddingLeft: '16px', paddingRight: '16px' },
 
     active: {
       backgroundColor: '#1900D5 !important',
-        color: 'white',
-        borderRadius: '4px',
-        '& .MuiSvgIcon-root': {
-          fill: `${colors.white.DEFAULT} !important`
-        }
+      color: 'white',
+      borderRadius: '4px',
+      '& .MuiSvgIcon-root': {
+        fill: `${colors.white.DEFAULT} !important`,
+      },
     },
     navBlock: {
       borderBottom: `1px solid ${colors.borderColor}`,
@@ -50,8 +54,8 @@ export const useStyles = makeStyles((theme: Theme) => {
         color: 'white',
         borderRadius: '4px',
         '& .MuiSvgIcon-root': {
-          fill: `${colors.white.DEFAULT} !important`
-        }
+          fill: `${colors.white.DEFAULT} !important`,
+        },
       },
     },
     itemSVG: {

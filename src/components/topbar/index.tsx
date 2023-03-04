@@ -2,62 +2,57 @@ import {
   AppBar,
   Box,
   Grid,
-  IconButton,
-  InputBase,
   Toolbar,
   Typography,
-  useTheme,
 } from '@mui/material';
-import { FC, useContext } from 'react';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import SearchIcon from '@mui/icons-material/Search';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import { ColorModeContext } from '../../theme';
-import { useStyles } from './styles';
-import { FlexBetween } from '../flexBetween';
-import { ITopbarProps } from '../../common/types/topbar';
+import { FC } from 'react';
 
-export const TopBarComponent:FC<ITopbarProps> = (props: ITopbarProps):JSX.Element => {
-  const { sideOpen,setSideOpen } = props;
-  const firstName:any= sessionStorage.getItem('user');
-  const welcomeName =  firstName ? (firstName[0].toUpperCase() + firstName.slice(1)) : 'user'
-  const theme = useTheme();
-  const colorMode: any = useContext(ColorModeContext);
+
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+
+import { useStyles } from './styles';
+import { ITopbarProps } from '../../common/types/topbar';
+import { ThemeSwitcherAndNotificationsComponent } from '../themeSwitcher';
+import { SearchInputComponent } from '../searchInput';
+
+export const TopBarComponent: FC<ITopbarProps> = (
+  props: ITopbarProps
+): JSX.Element => {
+  const { sideOpen, setSideOpen, isNonMobile } = props;
+  const firstName: any = sessionStorage.getItem('user');
+  const welcomeName = firstName
+    ? firstName[0].toUpperCase() + firstName.slice(1)
+    : 'user';
   const classes = useStyles();
 
   return (
     <AppBar className={classes.root} position='static'>
       <Toolbar className={classes.toolbar}>
-        <FlexBetween>
-          {!sideOpen && <MenuOutlinedIcon className={classes.menuIcon} onClick={e=>setSideOpen(!sideOpen)} />}
-          <Typography variant='h3' >Welcome {welcomeName}</Typography>
-        </FlexBetween>
-
-        <Box className={classes.topnav}>
-          <Grid
-            onClick={colorMode.toggleColorMode}
-            className={classes.iconBlock}
-          >
-            <IconButton className={classes.themeIcon}>
-              {theme.palette.mode === 'dark' ? (
-                <LightModeIcon />
-              ) : (
-                <DarkModeIcon />
+        <Grid container justifyContent='space-between' alignItems='center'>
+          <Grid item sm={isNonMobile ? 4 : 12} lg={isNonMobile ? 4 : 12}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}
+            >
+              {!sideOpen && (
+                <MenuOutlinedIcon
+                  className={classes.menuIcon}
+                  onClick={e => setSideOpen(!sideOpen)}
+                />
               )}
-            </IconButton>
-            <IconButton>
-              <NotificationsNoneIcon />
-            </IconButton>
+              <Typography variant='h3'>Welcome {welcomeName}</Typography>
+            </Box>
           </Grid>
-          <Grid className={classes.searchBlock}>
-            <IconButton className={classes.searchIcon}>
-              <SearchIcon />
-            </IconButton>
-            <InputBase className={classes.searchInput} placeholder='Search' />
-          </Grid>
-        </Box>
+          {isNonMobile && (
+            <Grid sm={8} lg={8} item className={classes.topnav}>
+              <Grid className={classes.themeWrapper}><ThemeSwitcherAndNotificationsComponent /></Grid>
+              <Grid className={classes.searchWrapper}><SearchInputComponent /></Grid>
+            </Grid>
+          )}
+        </Grid>
       </Toolbar>
     </AppBar>
     // <Box className={classes.root} sx={{flexGrow: 1}}>
