@@ -9,6 +9,7 @@ import { LayoutComponent } from './components/layout';
 import { WatchListComponent } from './pages/watchlist';
 import { FeedComponent } from './pages/feed';
 import { SettingsComponent } from './pages/settings';
+import { SingleAssetPage } from './pages/singleAsset';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -26,6 +27,7 @@ function App() {
                 <Route path='/watchlist' element={<WatchListComponent />} />
                 <Route path='/feed' element={<FeedComponent />} />
                 <Route path='/settings' element={<SettingsComponent />} />
+                <Route path='/single/:id' element={<SingleAssetPage />} />
               </Route>
               <Route path='/login' element={<AuthRootComponent />} />
               <Route path='/register' element={<AuthRootComponent />} />

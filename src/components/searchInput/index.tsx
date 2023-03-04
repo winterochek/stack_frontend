@@ -11,17 +11,25 @@ import {
 // import SearchIcon from '@mui/icons-material/Search';
 import { useAppSelector } from '../utils/hook';
 import { ISingleAsset } from '../../common/types/assets';
+import { useNavigate } from 'react-router-dom';
 
 export const SearchInputComponent = () => {
   // const classes = useStyles();
   const assetsArray: ISingleAsset[] = useAppSelector(
     (state: any) => state.assets.assets
   );
+  const [selectedItem, setSelectedItem] = React.useState<string | null>('')
+  const navigate = useNavigate()
+  
 
   return (
     <Stack spacing={2} >
       <Autocomplete
-        freeSolo
+      value={selectedItem}
+        onChange={(e:any, value:string | null)=> {
+          navigate(`single/${value}`)
+          setSelectedItem(null)
+        }}
         renderInput={item => (
           <TextField
             {...item}

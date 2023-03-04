@@ -12,7 +12,7 @@ import { useStyles } from './styles';
 
 
 
-export const TopPriceComponent:FC = (props:any):JSX.Element => {
+export const TopPriceComponent:FC<any> = (props:any):JSX.Element => {
   const {assets} = props
   const classes = useStyles()
   
