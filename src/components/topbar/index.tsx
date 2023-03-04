@@ -28,7 +28,7 @@ export const TopBarComponent: FC<ITopbarProps> = (
   return (
     <AppBar className={classes.root} position='static'>
       <Toolbar className={classes.toolbar}>
-        <Grid container justifyContent='space-between'>
+        <Grid container justifyContent='space-between' alignItems='center'>
           <Grid item sm={isNonMobile ? 4 : 12} lg={isNonMobile ? 4 : 12}>
             <Box
               sx={{

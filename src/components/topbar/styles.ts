@@ -34,9 +34,13 @@ export const useStyles: any = makeStyles((theme: Theme) => {
     },
     themeWrapper: {
       borderRight: `1px solid ${colors.borderColor}`,
+      display: 'flex',
+      flexDirection: 'row',
+
     },
     searchWrapper: {
       marginLeft: '28px',
+      width: '200px'
     },
 
     topnav: {

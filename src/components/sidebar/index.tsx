@@ -76,11 +76,9 @@ export const SideBarComponent: FC<ISideBarProps> = (
                   </IconButton>
                 )}
               </Box>
-              {!isNonMobile && <List>
-                <ListItem>
+              {!isNonMobile && <Box className={classes.searchWrapper}>
                   <SearchInputComponent />
-                </ListItem>
-              </List>}
+                </Box> }
               <List className={classes.menuList}>
                 {navMenu.map(item => (
                   <ListItem key={item.id}>
