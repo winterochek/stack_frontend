@@ -7,7 +7,7 @@ import { ColorModeContext, useMode } from './theme';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { LayoutComponent } from './components/layout';
 import { WatchListComponent } from './pages/watchlist';
-import { FeedComponent } from './pages/feed';
+import { FeedPage } from './pages/feed';
 import { SettingsComponent } from './pages/settings';
 import { SingleAssetPage } from './pages/singleAsset';
 
@@ -25,7 +25,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path='/' element={<Home />} />
                 <Route path='/watchlist' element={<WatchListComponent />} />
-                <Route path='/feed' element={<FeedComponent />} />
+                <Route path='/feed' element={<FeedPage />} />
                 <Route path='/settings' element={<SettingsComponent />} />
                 <Route path='/single/:id' element={<SingleAssetPage />} />
               </Route>

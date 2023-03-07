@@ -6,9 +6,9 @@ import {
   Button,
   Snackbar,
   Alert,
+  AlertColor,
 } from '@mui/material';
-import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ISingleAsset } from '../../common/types/assets';
 import { useAppDispatch, useAppSelector } from '../../components/utils/hook';
@@ -18,9 +18,9 @@ import { useStyles } from './styles';
 export const SingleAssetPage: FC = (): JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  // const stateUser = useAppSelector((state:any)=> state.auth);
-  // const userWatchList = stateUser.user.user.watchlist
-  // console.log(userWatchList);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [severity, setSeverity] = useState<AlertColor>('success');
 
   const assets: ISingleAsset[] = useAppSelector(
     (state: any) => state.assets.assets
@@ -33,17 +33,28 @@ export const SingleAssetPage: FC = (): JSX.Element => {
     (item: ISingleAsset) => item.name === (params.id as string)
   );
 
-  // const handler = userWatchList.indexOf((item:any) => item.name === asset?.name
-  // )
-  // console.log(handler);
-
   const handleCreateRecord = () => {
-    const data = { name: '', assetId: '' };
-    if (asset) {
-      data.name = asset.name;
-      data.assetId = asset.id;
+    try {
+      const data = { name: '', assetId: '' };
+      if (asset) {
+        data.name = asset.name;
+        data.assetId = asset.id;
+      }
+      dispatch(createWatchListRecord(data));
+      setError(false);
+      setSeverity('success');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 2000);
+    } catch (error) {
+      setError(true);
+      setSeverity('error');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 2000);
     }
-    dispatch(createWatchListRecord(data));
   };
 
   return (
@@ -144,11 +155,11 @@ export const SingleAssetPage: FC = (): JSX.Element => {
               Add to watchlist
             </Button>
           </Grid>
-          {/* <Snackbar open={open} autoHideDuration={6000}>
+          <Snackbar open={open} autoHideDuration={6000}>
             <Alert severity={severity} sx={{ width: '100%' }}>
               {!error ? 'Success!' : 'Ooops'}
             </Alert>
-          </Snackbar> */}
+          </Snackbar>
         </Grid>
       )}
     </>
