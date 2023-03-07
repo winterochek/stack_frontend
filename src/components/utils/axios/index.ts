@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-  baseURL: 'http://192.168.1.4:4000/',
+  baseURL: 'http://192.168.1.11:4000/',
   timeout: 1000,
   headers: { 'X-Custom-Header': 'foobar' },
 });
