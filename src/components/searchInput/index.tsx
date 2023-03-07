@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 // import { useStyles } from './styles';
 import {
   Grid,
@@ -13,7 +13,7 @@ import { useAppSelector } from '../utils/hook';
 import { ISingleAsset } from '../../common/types/assets';
 import { useNavigate } from 'react-router-dom';
 
-export const SearchInputComponent = () => {
+export const SearchInputComponent:FC = ():JSX.Element => {
   // const classes = useStyles();
   const assetsArray: ISingleAsset[] = useAppSelector(
     (state: any) => state.assets.assets
