@@ -17,7 +17,6 @@ export const Home: FC = (): JSX.Element => {
   const assetsArray: ISingleAsset[] = useAppSelector(
     (state:any) => state.assets.assets
   )
-  console.log('assetsArray',assetsArray);
   
   const dispatch: any = useAppDispatch();
   const classes = useStyles();
