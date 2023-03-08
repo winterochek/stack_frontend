@@ -29,21 +29,19 @@ export const FeedPage = () => {
       </Grid>
       <Grid item xs={12} md={12} className={classes.readMore}>
         <Typography variant='h4'>
-          <Link href={item.url}>Read more</Link>
+          <Link target='_blank' href={item.url}>Read more</Link>
         </Typography>
       </Grid>
     </Grid>
   ));
   return (
     <>
-      {news && (
-        <Grid className={classes.root}>
-          <Grid className={classes.blockTitle}>
-            <Typography variant='h2'>News</Typography>
-          </Grid>
-          <Grid>{renderFeedBlock}</Grid>
+      <Grid className={classes.root}>
+        <Grid className={classes.blockTitle}>
+          <Typography variant='h2'>News</Typography>
         </Grid>
-      )}
+        <Grid>{renderFeedBlock}</Grid>
+      </Grid>
     </>
   );
 };
