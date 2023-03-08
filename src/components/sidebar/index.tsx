@@ -121,7 +121,7 @@ export const SideBarComponent: FC<ISideBarProps> = (
                 )}
                 <ListItem>
                   <Box className={classes.menuItem}>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.itemSVG}>
                       <LogoutOutlined />
                     </ListItemIcon>
                     <ListItemText>

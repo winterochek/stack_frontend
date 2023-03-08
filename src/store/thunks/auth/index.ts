@@ -1,6 +1,6 @@
 import { ILoginData, IRegisterData } from './../../../common/types/auth/index';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { instance } from '../../../components/utils/axios';
+import { instance, instanceAuth } from '../../../components/utils/axios';
 
 export const loginUser = createAsyncThunk(
   'augh/login',
@@ -27,6 +27,39 @@ export const registerUser = createAsyncThunk(
       const user = await instance.post('auth/register', data);
       sessionStorage.setItem('token', user.data.token);
       sessionStorage.setItem('user', user.data.user.firstName);
+      return user.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const getPublicUser = createAsyncThunk(
+  'augh/get-public-user-info',
+  async (_, { rejectWithValue }) => {
+    try {
+      const user = await instanceAuth.get('auth/get-public-user-info');
+      return user.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateUserInfo = createAsyncThunk(
+  'users/update',
+  async (data:any, { rejectWithValue }) => {
+    try {
+      const user = await instanceAuth.patch('users/', data);
+      sessionStorage.setItem('user', user.data.firstName);
       return user.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {

@@ -15,15 +15,17 @@ import { ITopbarProps } from '../../common/types/topbar';
 import { ThemeSwitcherAndNotificationsComponent } from '../themeSwitcher';
 import { SearchInputComponent } from '../searchInput';
 
+
 export const TopBarComponent: FC<ITopbarProps> = (
   props: ITopbarProps
 ): JSX.Element => {
   const { sideOpen, setSideOpen, isNonMobile } = props;
+
   const firstName: any = sessionStorage.getItem('user');
-  const welcomeName = firstName
-    ? firstName[0].toUpperCase() + firstName.slice(1)
-    : 'user';
+  
   const classes = useStyles();
+
+ 
 
   return (
     <AppBar className={classes.root} position='static'>
@@ -43,7 +45,7 @@ export const TopBarComponent: FC<ITopbarProps> = (
                   onClick={e => setSideOpen(!sideOpen)}
                 />
               )}
-              <Typography variant='h3'>Welcome {welcomeName}</Typography>
+              <Typography variant='h3'>Welcome {firstName}</Typography>
             </Box>
           </Grid>
           {isNonMobile && (

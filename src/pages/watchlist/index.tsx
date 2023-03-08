@@ -12,7 +12,6 @@ export const WatchListComponent = () => {
 
   const assets = useAppSelector(state => state.assets.assets);
   // console.log(assets);
-
   useEffect(() => {
     dispatch(getTopPriceData());
     dispatch(getWatchListElements());
