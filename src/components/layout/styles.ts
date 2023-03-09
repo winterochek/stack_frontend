@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      backgroundColor: `${theme.palette.mode === 'light' ? '#F7F7F7' : '#0F0E0E'}`
     },
   };
 });
