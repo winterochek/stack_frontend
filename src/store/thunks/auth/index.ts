@@ -56,11 +56,50 @@ export const getPublicUser = createAsyncThunk(
 
 export const updateUserInfo = createAsyncThunk(
   'users/update',
-  async (data:any, { rejectWithValue }) => {
+  async (data: any, { rejectWithValue }) => {
     try {
       const user = await instanceAuth.patch('users/', data);
       sessionStorage.setItem('user', user.data.firstName);
       return user.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateUserPassword = createAsyncThunk(
+  'users/change-password',
+  async (
+    data: {
+      oldPassword: string;
+      newPassword: string;
+    },
+    { rejectWithValue }
+  ) => {
+    try {
+      return await instanceAuth.patch('users/change-password', data);
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  'users/delete-user',
+  async (
+    _,
+    { rejectWithValue }
+  ) => {
+    try {
+      return await instanceAuth.delete('users');
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
