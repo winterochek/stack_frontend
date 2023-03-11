@@ -31,6 +31,12 @@ export const SideBarComponent: FC<ISideBarProps> = (
 
   const { isNonMobile, drawerWidth, sideOpen, setSideOpen } = props;
 
+  const logout = () => {
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('token')
+    navigate('/login')
+  }
+
   useEffect(() => {
     setActive(pathname);
   }, [pathname]);
@@ -120,7 +126,9 @@ export const SideBarComponent: FC<ISideBarProps> = (
                   </ListItem>
                 )}
                 <ListItem>
-                  <Box className={classes.menuItem}>
+                  <Box 
+                  onClick={logout}
+                  className={classes.menuItem}>
                     <ListItemIcon className={classes.itemSVG}>
                       <LogoutOutlined />
                     </ListItemIcon>
