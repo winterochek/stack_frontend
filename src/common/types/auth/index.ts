@@ -1,4 +1,5 @@
 import { FieldValues, UseFormRegister, FieldErrors } from 'react-hook-form';
+import { IWatchListAsset } from '../assets';
 
 export interface IPropsLogin<
   TFieldValues extends FieldValues = FieldValues,
@@ -21,7 +22,7 @@ export interface IPropsRegister<
 }
 
 export interface IAuthState {
-  user: IPublicUser;
+  user: any
   isLogged: boolean;
   isLoading: boolean;
 }
@@ -33,17 +34,9 @@ interface IPublicUser {
   email: string;
   createdAt: string;
   updatedAt: string;
-  watchlist: [IWatchlist];
+  watchlist: IWatchListAsset[];
 }
 
-interface IWatchlist {
-  id: number | null;
-  name: string;
-  assetId: string;
-  createdAt: string;
-  updatedAt: string;
-  user: number | null;
-}
 
 export interface ILoginData {
   email: string;

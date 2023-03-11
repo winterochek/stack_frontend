@@ -6,11 +6,17 @@ export const loginUser = createAsyncThunk(
   'augh/login',
   async (data: ILoginData, { rejectWithValue }) => {
     try {
-      const user = await instance.post('auth/login', data);
-      sessionStorage.setItem('token', user.data.token);
-      sessionStorage.setItem('user', user.data.user.firstName);
-      return user.data;
-    } catch (error: any) {
+      const user = await instance.post('auth/login', data)
+      if (
+          user.data.status === 400 ||
+          user.data.status === 401 ||
+          user.data.status === 500
+      )
+          return
+      sessionStorage.setItem('token', user.data.token)
+      sessionStorage.setItem('name', user.data.user.firstName)
+      return user.data
+  } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -59,7 +65,7 @@ export const updateUserInfo = createAsyncThunk(
   async (data: any, { rejectWithValue }) => {
     try {
       const user = await instanceAuth.patch('users/', data);
-      sessionStorage.setItem('user', user.data.firstName);
+      sessionStorage.setItem('name', user.data.firstName);
       return user.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {

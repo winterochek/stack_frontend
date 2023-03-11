@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import { IAreaChartProps } from '../../../common/types/assets';
+import { FC } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -48,7 +49,7 @@ export const options = {
   },
 };
 
-export const AreaChart = (props: IAreaChartProps) => {
+export const AreaChart:FC<IAreaChartProps> = (props: IAreaChartProps): JSX.Element => {
   const { data } = props;
   const values = {
     labels: data.map((item: number[]) => moment(item[0]).format('DD.MM.YY')),

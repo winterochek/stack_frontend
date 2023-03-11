@@ -2,14 +2,14 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { getPublicUser, updateUserInfo } from '../../store/thunks/auth';
 import { useAppDispatch, useAppSelector } from '../utils/hook';
 import { useStyles } from './styles';
 import { Snackbar, Alert, AlertColor } from '@mui/material';
 
-export const PersonalDataComponent = (props: any) => {
-  const { user } = useAppSelector(state => state.auth.user);
+export const PersonalDataComponent:FC = ():JSX.Element => {
+  const  {user}  = useAppSelector(state => state.auth.user)
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (user) {
@@ -19,21 +19,23 @@ export const PersonalDataComponent = (props: any) => {
     }
   }, [user]);
 
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [severity, setSeverity] = useState<AlertColor>('success');
 
   const classes = useStyles();
 
-  const [changeHandler,setChangeHandler] = useState(false)
+  const [changeHandler,setChangeHandler] = useState<boolean>(false)
+
   React.useEffect(()=>{
     setChangeHandler(false)
   },[name,username,email])
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  
+  const handleSubmit = (e: React.SyntheticEvent):void => {
     e.preventDefault();
     try {
       const data = {

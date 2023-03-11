@@ -13,27 +13,35 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ISingleAsset } from '../../common/types/assets';
 import { useAppDispatch, useAppSelector } from '../../components/utils/hook';
 import { createWatchListRecord } from '../../store/thunks/assets';
+
 import { useStyles } from './styles';
 
 export const SingleAssetPage: FC = (): JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [severity, setSeverity] = useState<AlertColor>('success');
+  const [added, setAdded] = useState<boolean>(false);
+
+
+  const dispatch = useAppDispatch();
+
+  const classes: any = useStyles();
+
 
   const assets: ISingleAsset[] = useAppSelector(
     (state: any) => state.assets.assets
   );
-  const dispatch = useAppDispatch();
-
-  const classes = useStyles();
-
   const asset = assets.find(
     (item: ISingleAsset) => item.name === (params.id as string)
   );
+  
 
-  const handleCreateRecord = () => {
+
+  
+
+  const handleCreateRecord = (e: React.SyntheticEvent): void => {
     try {
       const data = { name: '', assetId: '' };
       if (asset) {
@@ -41,6 +49,7 @@ export const SingleAssetPage: FC = (): JSX.Element => {
         data.assetId = asset.id;
       }
       dispatch(createWatchListRecord(data));
+      setAdded(true);
       setError(false);
       setSeverity('success');
       setOpen(true);
@@ -132,11 +141,7 @@ export const SingleAssetPage: FC = (): JSX.Element => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid
-            container
-            justifyContent='center'
-            className={classes.cardButtonBlock}
-          >
+          <Box className={classes.cardButtonBlock}>
             <Button
               color='success'
               variant='outlined'
@@ -146,15 +151,26 @@ export const SingleAssetPage: FC = (): JSX.Element => {
               Return
             </Button>
 
-            <Button
-              color='success'
-              variant='outlined'
-              className={classes.cardButton}
-              onClick={handleCreateRecord}
-            >
-              Add to watchlist
-            </Button>
-          </Grid>
+            { !added ? (
+              <Button
+                color='success'
+                variant='outlined'
+                className={classes.cardButton}
+                onClick={handleCreateRecord}
+              >
+                Add to watchlist
+              </Button>
+            ) : (
+              <Button
+                color='success'
+                variant='outlined'
+                className={classes.cardButtonAdded}
+                disabled
+              >
+                Successfully added
+              </Button>
+            )}
+          </Box>
           <Snackbar open={open} autoHideDuration={6000}>
             <Alert severity={severity} sx={{ width: '100%' }}>
               {!error ? 'Success!' : 'Ooops'}

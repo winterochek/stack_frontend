@@ -1,7 +1,8 @@
 import { getNews } from './../../thunks/news/index';
 import { createSlice } from '@reduxjs/toolkit';
+import { INewsState } from '../../../common/types/news';
 
-const initialState: any = {
+const initialState: INewsState = {
   news: [],
 };
 

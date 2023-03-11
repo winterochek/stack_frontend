@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IWatchListState } from '../../../common/types/assets';
 import { getWatchListElements } from './../../thunks/watchlist/index';
 
-const initialState:any = {
+const initialState:IWatchListState = {
     watchlist: []
 }
 
