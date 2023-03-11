@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useStyles } from './styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,11 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../utils/hook';
 import { deleteUser } from '../../store/thunks/auth';
 
-export const DeleteUserComponent = () => {
-  const [checked, setChecked] = React.useState(false);
+export const DeleteUserComponent:FC = (): JSX.Element => {
+  const [checked, setChecked] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const handleDelete = () => {
+  const handleDelete = (e:React.SyntheticEvent):void => {
     dispatch(deleteUser());
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
@@ -34,7 +34,7 @@ export const DeleteUserComponent = () => {
             control={
               <Checkbox
                 checked={checked}
-                onChange={e => setChecked(prev => !prev)}
+                onChange={(e:React.SyntheticEvent) => setChecked(prev => !prev)}
                 sx={{ color: '#FFA7A7', '&.Mui-checked': { color: '#FFA7A7' } }}
               />
             }

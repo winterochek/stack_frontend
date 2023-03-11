@@ -45,3 +45,20 @@ export interface ISingleAsset {
     roi: Roi
     last_updated: Date
 }
+
+export interface ITablePriceData {
+    assets: ISingleAsset[]
+}
+export interface IWatchListState{
+    watchlist: IWatchListAsset[]
+}
+
+export interface IWatchListAsset {
+    assetId: string,
+    createdAt: string,
+    id: number | null,
+    name: string,
+    updatedAt: string,
+    user: number | null
+}
+

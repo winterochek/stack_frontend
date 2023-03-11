@@ -1,20 +1,22 @@
 import { Grid, Box, Typography, Link } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
+import { IArticle } from '../../common/types/news';
 import { useAppDispatch, useAppSelector } from '../../components/utils/hook';
 import { getNews } from '../../store/thunks/news';
 import { useStyles } from './styles';
 
-export const FeedPage = () => {
+export const FeedPage:FC = ():JSX.Element => {
   const classes: any = useStyles();
   const dispatch = useAppDispatch();
-  const news = useAppSelector(state => state.news.news);
-  console.log(news);
+  const news:IArticle[] = useAppSelector(state => state.news.news);
+  
+  
 
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch]);
 
-  const renderFeedBlock = news.map((item: any) => (
+  const renderFeedBlock = news.map((item: IArticle) => (
     <Grid container className={classes.feedBlock} key={item.url}>
       <Grid className={classes.imageBlock} item xs={12} md={3}>
         <img src={item.imageurl} alt={item.title} />

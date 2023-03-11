@@ -1,28 +1,29 @@
 import { Grid, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
+import { ISingleAsset, IWatchListAsset } from '../../common/types/assets';
 import { AssetsTableComponent } from '../../components/assetsTable';
 import { useAppDispatch, useAppSelector } from '../../components/utils/hook';
 import { getTopPriceData } from '../../store/thunks/assets';
 import { getWatchListElements } from '../../store/thunks/watchlist';
 import { useStyles } from './styles';
 
-export const WatchListComponent = () => {
+export const WatchListPage:FC = ():JSX.Element => {
   const dispatch = useAppDispatch();
-  const watchlist = useAppSelector(state => state.watchlist.watchlist);
+  const watchlist:IWatchListAsset[] = useAppSelector(state => state.watchlist.watchlist);
+  
 
-  const assets = useAppSelector(state => state.assets.assets);
-  // console.log(assets);
+  const assets:ISingleAsset[] = useAppSelector(state => state.assets.assets);
+  
   useEffect(() => {
     dispatch(getTopPriceData());
     dispatch(getWatchListElements());
   }, [dispatch]);
 
-  const filteredArray = assets.filter((item: any) => {
-    return watchlist.some((otherItem: any) => {
+  const filteredArray = assets.filter((item: ISingleAsset) => {
+    return watchlist.some((otherItem: IWatchListAsset) => {
       return otherItem.assetId === item.id;
     });
   });
-  console.log(filteredArray);
   const classes = useStyles();
   return (
     <Grid className={classes.root}>

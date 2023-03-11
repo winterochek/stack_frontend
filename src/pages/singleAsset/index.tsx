@@ -18,8 +18,8 @@ import { useStyles } from './styles';
 export const SingleAssetPage: FC = (): JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [severity, setSeverity] = useState<AlertColor>('success');
 
   const assets: ISingleAsset[] = useAppSelector(
@@ -27,13 +27,13 @@ export const SingleAssetPage: FC = (): JSX.Element => {
   );
   const dispatch = useAppDispatch();
 
-  const classes = useStyles();
+  const classes:any = useStyles();
 
   const asset = assets.find(
     (item: ISingleAsset) => item.name === (params.id as string)
   );
 
-  const handleCreateRecord = () => {
+  const handleCreateRecord = (e:React.SyntheticEvent):void => {
     try {
       const data = { name: '', assetId: '' };
       if (asset) {

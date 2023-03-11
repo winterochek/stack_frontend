@@ -1,7 +1,7 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { TabPanel } from '../../components/tabPanel';
 import { tabProps } from '../../components/utils/helpers';
@@ -12,14 +12,14 @@ import { getPublicUser } from '../../store/thunks/auth';
 import { ChangePasswordComponent } from '../../components/changePassword';
 import { DeleteUserComponent } from '../../components/deleteUser';
 
-export const SettingsPage = () => {
-  const [value, setValue] = useState(0);
+export const SettingsPage:FC = ():JSX.Element => {
+  const [value, setValue] = useState<number>(0);
   const dispatch = useAppDispatch();
   const classes = useStyles();
   useEffect(() => {
     dispatch(getPublicUser());
   }, [dispatch]);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: number):void => {
     setValue(newValue);
   };
 

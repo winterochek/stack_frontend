@@ -10,7 +10,7 @@ import { LineChart } from '../../components/charts/lineChart';
 import { IChartData, ISingleAsset } from '../../common/types/assets';
 import { TopPriceComponent } from '../../components/topPrice';
 
-export const Home: FC = (): JSX.Element => {
+export const HomePage: FC = (): JSX.Element => {
   const favoriteAssets: IChartData[] = useAppSelector(
     (state: any) => state.assets.favoriteAssets
   );

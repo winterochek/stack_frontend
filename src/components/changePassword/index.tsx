@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useStyles } from './styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -7,60 +7,30 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useAppDispatch } from '../utils/hook';
 import { updateUserPassword } from '../../store/thunks/auth';
 
-export const ChangePasswordComponent = () => {
-  const [newPassword, setNewPassword] = React.useState('');
-  const [currentPassword, setCurrentPassword] = React.useState('');
-  
-  const dispatch = useAppDispatch()
+export const ChangePasswordComponent:FC = ():JSX.Element => {
+  const [newPassword, setNewPassword] = React.useState<string>('');
+  const [currentPassword, setCurrentPassword] = React.useState<string>('');
 
-  const handleSumbit = (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    try{
-        const data = {
-            oldPassword: currentPassword,
-            newPassword: newPassword
-        }
-        dispatch(updateUserPassword(data))
-        setChangeHandler(true)
-    } catch(e){
+  const dispatch = useAppDispatch();
 
-    }
-  }
-  
-  const [changeHandler, setChangeHandler] = React.useState(false);
+  const handleSumbit = (e: React.SyntheticEvent):void => {
+    e.preventDefault();
+    try {
+      const data = {
+        oldPassword: currentPassword,
+        newPassword: newPassword,
+      };
+      dispatch(updateUserPassword(data));
+      setChangeHandler(true);
+    } catch (e) {}
+  };
 
-
+  const [changeHandler, setChangeHandler] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setChangeHandler(false);
   }, [newPassword, currentPassword]);
 
-  //   const handleSubmit = (e: React.SyntheticEvent) => {
-  //     e.preventDefault();
-  //     try {
-  //       const data = {
-  //         firstName: name,
-  //         username: username,
-  //         email: email,
-  //       };
-  //       dispatch(updateUserInfo(data));
-  //       dispatch(getPublicUser());
-  //       setError(false);
-  //       setSeverity('success');
-  //       setOpen(true);
-  //       setChangeHandler(true)
-  //       setTimeout(() => {
-  //         setOpen(false);
-  //       }, 2000);
-  //     } catch (e) {
-  //       setError(true);
-  //       setSeverity('error');
-  //       setOpen(true);
-  //       setTimeout(() => {
-  //         setOpen(false);
-  //       }, 2000);
-  //     }
-  //   };
   const classes = useStyles();
   return (
     <Grid

@@ -31,12 +31,6 @@ export const SideBarComponent: FC<ISideBarProps> = (
 
   const { isNonMobile, drawerWidth, sideOpen, setSideOpen } = props;
 
-  const logout = () => {
-    sessionStorage.removeItem('user')
-    sessionStorage.removeItem('token')
-    navigate('/login')
-  }
-
   useEffect(() => {
     setActive(pathname);
   }, [pathname]);
@@ -82,9 +76,11 @@ export const SideBarComponent: FC<ISideBarProps> = (
                   </IconButton>
                 )}
               </Box>
-              {!isNonMobile && <Box className={classes.searchWrapper}>
+              {!isNonMobile && (
+                <Box className={classes.searchWrapper}>
                   <SearchInputComponent />
-                </Box> }
+                </Box>
+              )}
               <List className={classes.menuList}>
                 {navMenu.map(item => (
                   <ListItem key={item.id}>
@@ -126,9 +122,7 @@ export const SideBarComponent: FC<ISideBarProps> = (
                   </ListItem>
                 )}
                 <ListItem>
-                  <Box 
-                  onClick={logout}
-                  className={classes.menuItem}>
+                  <Box className={classes.menuItem}>
                     <ListItemIcon className={classes.itemSVG}>
                       <LogoutOutlined />
                     </ListItemIcon>
