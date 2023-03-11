@@ -1,15 +1,22 @@
 import { Box, useMediaQuery } from '@mui/material';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { getPublicUser } from '../../store/thunks/auth';
 import { SideBarComponent } from '../sidebar';
 import { TopBarComponent } from '../topbar';
+import { useAppDispatch } from '../utils/hook';
 import { useStyles } from './styles';
 
 export const LayoutComponent:FC = ():JSX.Element => {
-  const [sideOpen, setSideOpen] = useState(false);
+  const [sideOpen, setSideOpen] = useState<boolean>(false);
   const location = useLocation();
   const isNonMobile = useMediaQuery('(min-width: 760px');
   const classes = useStyles();
+  const dispatch = useAppDispatch()
+
+  useEffect(()=>{
+    dispatch(getPublicUser())
+  },[dispatch])
   return location.pathname === '/login' || location.pathname === '/register' ? (
     <>
       <Outlet />

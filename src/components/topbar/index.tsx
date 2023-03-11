@@ -7,13 +7,13 @@ import { useStyles } from './styles';
 import { ITopbarProps } from '../../common/types/topbar';
 import { ThemeSwitcherAndNotificationsComponent } from '../themeSwitcher';
 import { SearchInputComponent } from '../searchInput';
+import { useAppSelector } from '../utils/hook';
 
 export const TopBarComponent: FC<ITopbarProps> = (
   props: ITopbarProps
 ): JSX.Element => {
   const { sideOpen, setSideOpen, isNonMobile } = props;
-
-  const firstName: any = sessionStorage.getItem('name');
+  const {user} = useAppSelector(state=>state.auth.user)
 
   const classes = useStyles();
 
@@ -35,7 +35,7 @@ export const TopBarComponent: FC<ITopbarProps> = (
                   onClick={e => setSideOpen(!sideOpen)}
                 />
               )}
-              <Typography variant='h3'>Welcome {firstName}</Typography>
+              {user && <Typography variant='h3'>Welcome {user.firstName}</Typography>}
             </Box>
           </Grid>
           {isNonMobile && (

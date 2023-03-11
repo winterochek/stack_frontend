@@ -10,8 +10,6 @@ import { Snackbar, Alert, AlertColor } from '@mui/material';
 
 export const PersonalDataComponent:FC = ():JSX.Element => {
   const  {user}  = useAppSelector(state => state.auth.user)
-  
-  
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (user) {
@@ -36,6 +34,7 @@ export const PersonalDataComponent:FC = ():JSX.Element => {
   React.useEffect(()=>{
     setChangeHandler(false)
   },[name,username,email])
+  
   const handleSubmit = (e: React.SyntheticEvent):void => {
     e.preventDefault();
     try {
